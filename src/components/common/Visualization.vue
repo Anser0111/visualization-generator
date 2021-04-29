@@ -1,30 +1,34 @@
 <template>
   <div id="home">
-    <h1>{{ title }}</h1>
-    <div id="main" style="width: 600px; height: 400px"></div>
+    <div id="head">
+      <h1>{{ title }}</h1>
+      <div id="main" style="width: 1200px; height: 400px"></div>
+    </div>
     <hr />
-    <div id="input">
-      <div id="input1">
-        <div>{{ div1 }}</div>
-        <input type="text" v-model="count" />
-      </div>
-      <div id="input2">
-        <div>{{ div2 }}</div>
-        <input type="text" v-model="second" />
-      </div>
-      <div id="input3">
-        <div>{{ div3 }}</div>
-        <div v-for="(item, index) in parseInt(count)" :key="index">
-          <span>{{ item + ". " }}</span>
-          <input type="text" v-model="nameArr[index]" />
-          <input type="text" v-model="initArr[index]" />
-          <input type="text" v-model="endArr[index]" />
+    <div id="body">
+      <div id="input">
+        <div id="input1">
+          <div>{{ div1 }}</div>
+          <input type="text" v-model="count" />
+        </div>
+        <div id="input2">
+          <div>{{ div2 }}</div>
+          <input type="text" v-model="second" />
+        </div>
+        <div id="input3">
+          <div>{{ div3 }}</div>
+          <div v-for="(item, index) in parseInt(count)" :key="index">
+            <span>{{ item + ". " }}</span>
+            <input type="text" v-model="nameArr[index]" />
+            <input type="text" v-model="initArr[index]" />
+            <input type="text" v-model="endArr[index]" />
+          </div>
         </div>
       </div>
-    </div>
-    <div id="start">
-      <button @click="animation">开始</button>
-      <button @click="random">随机数据测试</button>
+      <div id="start">
+        <button @click="animation">开始</button>
+        <button @click="random">随机数据测试</button>
+      </div>
     </div>
   </div>
 </template>
@@ -57,7 +61,7 @@ export default {
       // 指定图表的配置项和数据
       this.option = {
         xAxis: {
-          max: "dataMax",
+          // max: "dataMax",
         },
         yAxis: {
           type: "category",
@@ -138,5 +142,8 @@ button {
 input {
   margin-right: 5px;
   margin-bottom: 2px;
+}
+#head {
+  
 }
 </style>
