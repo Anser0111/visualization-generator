@@ -1,19 +1,11 @@
-# try-echarts
+# 数据可视化生成器
 
-## Project setup
-```
-npm install
-```
+输入数据，即可快速实现数据可视化。
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## 版本日志
 
-### Compiles and minifies for production
-```
-npm run build
-```
+1.0
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+实现了通过输入控制数据组数，数据初始值，结束值，动画持续时长的功能。
+
+实现了进行随机数据测试的功能。
