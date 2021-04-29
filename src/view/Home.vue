@@ -13,7 +13,10 @@ export default {
       myChart: {},
       option: {},
       data: [],
-      jsonData: [],
+      jsonData: [
+        [100, 200, 300, 400, 500],
+        [200, 500, 600, 400, 900],
+      ],
       j: 0,
     };
   },
@@ -61,46 +64,25 @@ export default {
     run() {
       let data = this.option.series[0].data;
       for (let i = 0; i < data.length; ++i) {
-        // if (Math.random() > 0.9) {
-        //   data[i] += Math.round(Math.random() * 2000);
-        // } else {
-        //   data[i] += Math.round(Math.random() * 200);
-        // }
         data[i] += this.jsonData[this.j][i];
       }
       this.myChart.setOption(this.option);
     },
     animation() {
-      // console.log(this.jsonData[0][0]);
       setTimeout(() => {
         this.run();
         this.j++;
       }, 0);
-      setInterval(() => {
-        this.run();
-        this.j++;
-        // console.log(this.j);
-        // console.log(this.jsonData[this.j]);
+      let timer = setInterval(() => {
+        //设置边界，当数据用完时，不会报错。
+        if (this.jsonData.length > this.j) {
+          this.run();
+          this.j++;
+        } else {
+          clearInterval(timer);
+        }
       }, 3000);
     },
-  },
-  created() {
-    const xhr = new XMLHttpRequest();
-    // 利用箭头函数没有this！
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-          this.jsonData = xhr.response;
-          console.log("成功");
-        } else {
-          console.log("错误");
-        }
-      }
-    };
-    // 设置返回数据的类型。设置成json后，即可直接用。
-    xhr.responseType = "json";
-    xhr.open("GET", "http://127.0.0.1:8000/hello", true);
-    xhr.send();
   },
   mounted() {
     for (let i = 0; i < 5; ++i) {
