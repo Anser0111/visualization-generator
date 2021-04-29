@@ -1,95 +1,14 @@
 <template>
   <div id="home">
-    <div id="main" style="width: 600px; height: 600px"></div>
-    <button @click="animation">变化</button>
+    <visualization></visualization>
   </div>
 </template>
 
 <script>
+import Visualization from "../components/common/Visualization.vue";
 export default {
   name: "App",
-  data() {
-    return {
-      myChart: {},
-      option: {},
-      data: [],
-      jsonData: [
-        [100, 200, 300, 400, 500],
-        [200, 500, 600, 400, 900],
-      ],
-      j: 0,
-    };
-  },
-  methods: {
-    drawChart() {
-      // 基于准备好的dom，初始化echarts实例
-      this.myChart = this.$echarts.init(document.getElementById("main"));
-      // 指定图表的配置项和数据
-      this.option = {
-        xAxis: {
-          max: "dataMax",
-        },
-        yAxis: {
-          type: "category",
-          data: ["A", "B", "C", "D", "E"],
-          inverse: true,
-          animationDuration: 300,
-          animationDurationUpdate: 300,
-          max: 4, // only the largest 5 bars will be displayed
-        },
-        series: [
-          {
-            realtimeSort: true,
-            name: "X",
-            type: "bar",
-            data: this.data,
-            label: {
-              show: true,
-              position: "right",
-              valueAnimation: true,
-            },
-          },
-        ],
-        legend: {
-          show: true,
-        },
-        animationDuration: 0, // 初始动画的时长
-        animationDurationUpdate: 3000, // 数据更新动画的时长
-        animationEasing: "linear",
-        animationEasingUpdate: "linear",
-      };
-      // 使用刚指定的配置项和数据显示图表。
-      this.myChart.setOption(this.option);
-    },
-    run() {
-      let data = this.option.series[0].data;
-      for (let i = 0; i < data.length; ++i) {
-        data[i] += this.jsonData[this.j][i];
-      }
-      this.myChart.setOption(this.option);
-    },
-    animation() {
-      setTimeout(() => {
-        this.run();
-        this.j++;
-      }, 0);
-      let timer = setInterval(() => {
-        //设置边界，当数据用完时，不会报错。
-        if (this.jsonData.length > this.j) {
-          this.run();
-          this.j++;
-        } else {
-          clearInterval(timer);
-        }
-      }, 3000);
-    },
-  },
-  mounted() {
-    for (let i = 0; i < 5; ++i) {
-      this.data.push(Math.round(Math.random() * 2000));
-    }
-    this.drawChart();
-  },
+  components: { Visualization },
 };
 </script>
 
